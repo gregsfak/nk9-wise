@@ -379,11 +379,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Button feedback
       const submitBtn = leadForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Αποστολή στο gregsfak@hotmail.com...';
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Αποστολή αίτησης...';
       submitBtn.disabled = true;
 
-      // Payload for FormSubmit.co
-      const payload = {
+      // Prepare data
+      const formDataObj = {
         'Ονοματεπώνυμο': name,
         'Τηλέφωνο': phone,
         'Όνομα & Ράτσα Σκύλου': dogName,
@@ -393,7 +393,100 @@ document.addEventListener('DOMContentLoaded', () => {
         'Πρόγραμμα': programSelect,
         'Ώρα Επικοινωνίας': preferredTime,
         'Μήνυμα / Δυσκολία': message,
-        'Αποδοχή Όρων, GDPR & Cookies': agreeTerms && agreeTerms.checked ? 'ΝΑΙ' : 'ΟΧΙ',
+        'Αποδοχή Όρων, GDPR & Cookies': agreeTerms && agreeTerms.checked ? 'ΝΑΙ' : 'ΟΧΙ'
+      };
+
+      // 1. If running on cPanel/PHP server, post directly to submit-lead.php (saves to leads.csv & sends email)
+      let phpSaved = false;
+      try {
+        const phpRes = await fetch('submit-lead.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(formDataObj)
+        });
+
+        if (phpRes.ok) {
+          const phpData = await phpRes.json();
+          if (phpData && phpData.success) {
+            phpSaved = true;
+          }
+        }
+      } catch (phpErr) {
+        // Normal when previewing on GitHub Pages or local file without PHP server
+        console.info('submit-lead.php not active on this host, running fallback:', phpErr);
+      }
+
+      if (phpSaved) {
+        leadForm.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+
+        if (successMsg) {
+          successMsg.innerHTML = `
+            <div style="font-size: 1.15rem; font-weight: 800; margin-bottom: 6px;">🎉 Ευχαριστούμε πολύ, ${name}!</div>
+            <div style="font-size: 0.95rem; line-height: 1.5;">Η αίτησή σας καταχωρήθηκε επιτυχώς στο σύστημα! Θα επικοινωνήσουμε άμεσα μαζί σας στο <strong>${phone}</strong>.</div>
+          `;
+          successMsg.style.display = 'block';
+          successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          setTimeout(() => {
+            successMsg.style.display = 'none';
+          }, 12000);
+        }
+        return;
+      }
+
+      // 2. If running in WordPress (nk9_ajax_obj is available), submit to WP AJAX
+      if (typeof nk9_ajax_obj !== 'undefined' && nk9_ajax_obj.ajax_url) {
+        try {
+          const wpFormData = new FormData();
+          wpFormData.append('action', 'nk9_lead_submit');
+          wpFormData.append('nonce', nk9_ajax_obj.nonce);
+          wpFormData.append('fullname', name);
+          wpFormData.append('phone', phone);
+          wpFormData.append('dog_name', dogName);
+          wpFormData.append('dog_age', dogAge);
+          wpFormData.append('area', clientArea);
+          wpFormData.append('contact_method', preferredContact);
+          wpFormData.append('program', programSelect);
+          wpFormData.append('call_time', preferredTime);
+          wpFormData.append('message', message);
+          wpFormData.append('agree_terms', agreeTerms && agreeTerms.checked ? 1 : 0);
+
+          const wpRes = await fetch(nk9_ajax_obj.ajax_url, {
+            method: 'POST',
+            body: wpFormData
+          });
+          const wpData = await wpRes.json();
+
+          if (wpData.success) {
+            leadForm.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+
+            if (successMsg) {
+              successMsg.innerHTML = `
+                <div style="font-size: 1.15rem; font-weight: 800; margin-bottom: 6px;">🎉 Ευχαριστούμε πολύ, ${name}!</div>
+                <div style="font-size: 0.95rem; line-height: 1.5;">Η αίτησή σας καταχωρήθηκε επιτυχώς! Θα επικοινωνήσουμε μαζί σας στο <strong>${phone}</strong>.</div>
+              `;
+              successMsg.style.display = 'block';
+              successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              setTimeout(() => {
+                successMsg.style.display = 'none';
+              }, 12000);
+            }
+            return;
+          }
+        } catch (wpErr) {
+          console.warn('WP AJAX notice:', wpErr);
+        }
+      }
+
+      // 3. Fallback for Static GitHub Pages (FormSubmit.co)
+      const payload = {
+        ...formDataObj,
         '_subject': `🐾 Νέα Αίτηση Αξιολόγησης: ${name} (${phone}) - NK9 Wise Academy`,
         '_template': 'table',
         '_captcha': 'false'
@@ -433,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (successMsg) {
           successMsg.innerHTML = `
             <div style="font-size: 1.15rem; font-weight: 800; margin-bottom: 6px;">🎉 Ευχαριστούμε πολύ, ${name}!</div>
-            <div style="font-size: 0.95rem; line-height: 1.5;">Το αίτημά σας καταχωρήθηκε για αποστολή στο <strong>gregsfak@hotmail.com</strong>. Θα επικοινωνήσουμε μαζί σας στο <strong>${phone}</strong>!</div>
+            <div style="font-size: 0.95rem; line-height: 1.5;">Το αίτημά σας καταχωρήθηκε επιτυχώς! Θα επικοινωνήσουμε μαζί σας στο <strong>${phone}</strong>!</div>
           `;
           successMsg.style.display = 'block';
           successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

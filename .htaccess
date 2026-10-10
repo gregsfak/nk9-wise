@@ -1,0 +1,5 @@
+# Προστασία του αρχείου leads.csv από απευθείας προβολή σε browser
+<Files "leads.csv">
+    Order Allow,Deny
+    Deny from all
+</Files>

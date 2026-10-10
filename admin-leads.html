@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Διαχείριση & Λήψη Leads CSV | NK9 Wise Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #090a0e;
+      color: #e5e7eb;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .admin-card {
+      background: #11141c;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 16px;
+      max-width: 580px;
+      width: 100%;
+      padding: 36px 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
+      text-align: center;
+    }
+    .icon-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1.5px solid #d4af37;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #f5e49e;
+      margin: 0 auto 20px auto;
+    }
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    p {
+      color: #9ca3af;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #f5e49e;
+      margin-bottom: 8px;
+    }
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 13px 16px;
+      background: #090b10;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    input[type="password"]:focus, input[type="text"]:focus {
+      border-color: #d4af37;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+    }
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #d4af37 0%, #aa820a 100%);
+      color: #0b0c10;
+      font-weight: 800;
+      font-size: 1.05rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+      background: linear-gradient(135deg, #f5e49e 0%, #d4af37 100%);
+    }
+    .btn-back {
+      display: inline-block;
+      margin-top: 18px;
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .btn-back:hover {
+      color: #f5e49e;
+    }
+    .info-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 22px;
+      font-size: 0.84rem;
+      color: #6b7280;
+      text-align: left;
+    }
+    .info-box i { color: #d4af37; margin-right: 6px; }
+  </style>
+</head>
+<body>
+
+  <div class="admin-card">
+    <div class="icon-badge">
+      <i class="fa-solid fa-file-csv"></i>
+    </div>
+    <h1>Λήψη Αρχείου Leads CSV</h1>
+    <p>Εισάγετε το μυστικό κλειδί διαχειριστή για να κατεβάσετε όλες τις αιτήσεις της φόρμας σε αρχείο Excel/CSV.</p>
+
+    <form method="GET" action="submit-lead.php">
+      <input type="hidden" name="download" value="1">
+      
+      <div class="form-group">
+        <label for="key"><i class="fa-solid fa-key"></i> Μυστικό Κλειδί Πρόσβασης:</label>
+        <input type="password" id="key" name="key" placeholder="Εισάγετε το μυστικό κλειδί..." required autofocus>
+      </div>
+
+      <button type="submit" class="btn-download">
+        <i class="fa-solid fa-cloud-arrow-down"></i> Κατέβασμα Leads (CSV)
+      </button>
+    </form>
+
+    <a href="index.html" class="btn-back">
+      <i class="fa-solid fa-arrow-left"></i> Επιστροφή στην Αρχική Σελίδα
+    </a>
+
+    <div class="info-box">
+      <i class="fa-solid fa-shield-halved"></i> <strong>Προστασία Δεδομένων:</strong> Το αρχείο CSV προστατεύεται από απευθείας πρόσβαση τρίτων μέσω <code>.htaccess</code>.
+    </div>
+  </div>
+
+</body>
+</html>
