@@ -396,27 +396,37 @@ document.addEventListener('DOMContentLoaded', () => {
         'Αποδοχή Όρων, GDPR & Cookies': agreeTerms && agreeTerms.checked ? 'ΝΑΙ' : 'ΟΧΙ'
       };
 
-      // 1. If running on cPanel/PHP server, post directly to submit-lead.php (saves to leads.csv & sends email)
-      let phpSaved = false;
-      try {
-        const phpRes = await fetch('submit-lead.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(formDataObj)
-        });
+      // 1. Intelligent Host Detection:
+      // If we are on static GitHub Pages (*.github.io) or file://, DO NOT request submit-lead.php (which would trigger browser download because GitHub does not run PHP).
+      const isStaticOrGithub = window.location.protocol === 'file:' || 
+                               window.location.hostname.endsWith('github.io') ||
+                               window.location.hostname === 'localhost' && !window.location.port;
 
-        if (phpRes.ok) {
-          const phpData = await phpRes.json();
-          if (phpData && phpData.success) {
-            phpSaved = true;
+      let phpSaved = false;
+
+      // Only attempt submit-lead.php on production PHP server (e.g. cPanel / live domain)
+      if (!isStaticOrGithub) {
+        try {
+          const phpRes = await fetch('submit-lead.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(formDataObj)
+          });
+
+          // Verify server responded with JSON (and not raw PHP download)
+          const contentType = phpRes.headers.get('content-type') || '';
+          if (phpRes.ok && contentType.includes('application/json')) {
+            const phpData = await phpRes.json();
+            if (phpData && phpData.success) {
+              phpSaved = true;
+            }
           }
+        } catch (phpErr) {
+          console.info('cPanel PHP handler not active on this environment, falling back:', phpErr);
         }
-      } catch (phpErr) {
-        // Normal when previewing on GitHub Pages or local file without PHP server
-        console.info('submit-lead.php not active on this host, running fallback:', phpErr);
       }
 
       if (phpSaved) {
@@ -1022,10 +1032,134 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 750);
     }
   } catch (e) {
-    setTimeout(() => {
-      showBanner();
-    }, 750);
-  }
+  /* ===================================================
+     11. Dynamic Content Synchronization (content.json)
+     =================================================== */
+  const applyDynamicContent = (c) => {
+    if (!c) return;
+
+    // 0. SEO (Title & Meta Description)
+    if (c.seo) {
+      if (c.seo.title) {
+        document.title = c.seo.title;
+      }
+      if (c.seo.description) {
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', c.seo.description);
+      }
+    }
+
+    // 1. Top Bar & Phone
+    if (c.topBar) {
+      if (c.topBar.badge) {
+        document.querySelectorAll('.marquee-badge').forEach(el => el.textContent = c.topBar.badge);
+      }
+      if (c.topBar.text) {
+        document.querySelectorAll('.marquee-text').forEach(el => {
+          el.innerHTML = `🐾 <strong>${c.topBar.text}</strong>`;
+        });
+      }
+      if (c.topBar.phone) {
+        document.querySelectorAll('.marquee-phone').forEach(el => {
+          el.href = `tel:${c.topBar.phone.replace(/\s+/g, '')}`;
+          el.innerHTML = `<i class="fa-solid fa-phone"></i> <strong>${c.topBar.phone}</strong>`;
+        });
+      }
+    }
+
+    // 2. Hero Section & YouTube Video
+    if (c.hero) {
+      if (c.hero.title) {
+        const heroH1 = document.querySelector('.hero-content h1');
+        if (heroH1) heroH1.innerHTML = c.hero.title;
+      }
+      if (c.hero.subtitle) {
+        const heroSub = document.querySelector('.hero-subtitle');
+        if (heroSub) heroSub.textContent = c.hero.subtitle;
+      }
+      if (c.hero.youtubeId) {
+        const ytThumb = document.querySelector('.hero-video-bg');
+        if (ytThumb && c.hero.videoThumb) ytThumb.src = c.hero.videoThumb;
+
+        const ytIframe = document.getElementById('modalYoutubeIframe');
+        if (ytIframe) {
+          ytIframe.setAttribute('data-src', `https://www.youtube.com/embed/${c.hero.youtubeId}?autoplay=1&rel=0&playsinline=1&enablejsapi=1`);
+        }
+        const ytLink = document.querySelector('.yt-direct-link');
+        if (ytLink) ytLink.href = `https://www.youtube.com/watch?v=${c.hero.youtubeId}`;
+      }
+    }
+
+    // 3. Trainer Profile & Image
+    if (c.trainer) {
+      if (c.trainer.image) {
+        const trImg = document.querySelector('.trainer-img');
+        if (trImg) {
+          trImg.src = c.trainer.image;
+          if (c.trainer.imageAlt) trImg.alt = c.trainer.imageAlt;
+        }
+      }
+      if (c.trainer.title) {
+        const trH2 = document.querySelector('.trainer-content h2');
+        if (trH2) trH2.innerHTML = c.trainer.title;
+      }
+      if (c.trainer.quote) {
+        const trQuote = document.querySelector('.trainer-quote-text');
+        if (trQuote) trQuote.textContent = c.trainer.quote;
+      }
+      const bioPs = document.querySelectorAll('.trainer-bio-p');
+      if (bioPs.length > 0 && c.trainer.bio1) bioPs[0].innerHTML = c.trainer.bio1;
+      if (bioPs.length > 1 && c.trainer.bio2) bioPs[1].innerHTML = c.trainer.bio2;
+
+      if (c.trainer.philosophy) {
+        const philPs = document.querySelectorAll('.trainer-philosophy-card p');
+        if (philPs.length > 0) philPs[0].innerHTML = c.trainer.philosophy;
+      }
+    }
+
+    // 4. Program Images & Alt Text
+    if (c.programs) {
+      const progCards = document.querySelectorAll('.programs-grid .program-card');
+      const progKeys = ['prog1', 'prog2', 'prog3', 'prog4', 'prog5', 'prog6'];
+      progCards.forEach((card, idx) => {
+        const key = progKeys[idx];
+        if (key) {
+          const img = card.querySelector('.program-img');
+          if (img) {
+            if (c.programs[key + '_image']) img.src = c.programs[key + '_image'];
+            if (c.programs[key + '_alt']) img.alt = c.programs[key + '_alt'];
+          }
+        }
+      });
+    }
+
+    // 5. Contact Info
+    if (c.contact) {
+      if (c.contact.phone) {
+        document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+          a.href = `tel:${c.contact.phone.replace(/\s+/g, '')}`;
+        });
+      }
+      if (c.contact.email) {
+        document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+          a.href = `mailto:${c.contact.email}`;
+          if (a.querySelector('strong')) a.querySelector('strong').textContent = c.contact.email;
+        });
+      }
+    }
+  };
+
+  // Asynchronous non-blocking fetch of content.json
+  try {
+    fetch('content.json?v=' + Date.now())
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data) applyDynamicContent(data);
+      })
+      .catch(err => {
+        // Safe silent fallback: defaults remain intact
+      });
+  } catch (e) {}
 
 });
 

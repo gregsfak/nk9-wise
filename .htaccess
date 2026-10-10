@@ -1,5 +1,11 @@
-# Προστασία του αρχείου leads.csv από απευθείας προβολή σε browser
-<Files "leads.csv">
+# Προστασία των ευαίσθητων αρχείων δεδομένων και ρυθμίσεων
+<FilesMatch "^(leads\.csv|admin-config\.json)$">
     Order Allow,Deny
     Deny from all
+</FilesMatch>
+
+# Επιτρέπεται η απευθείας ανάγνωση του content.json από τον browser για τη δυναμική φόρτωση του site
+<Files "content.json">
+    Order Allow,Deny
+    Allow from all
 </Files>
