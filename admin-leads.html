@@ -523,100 +523,348 @@
             </div>
           </div>
 
-          <!-- 4. Φωτογραφίες Προγραμμάτων & Μεθόδου -->
+          <!-- 4. Προγράμματα Εκπαίδευσης (Κείμενα, Χαρακτηριστικά, Φωτογραφίες & Alt Text) -->
           <div class="sub-section-box">
-            <h3 class="sub-section-title"><i class="fa-solid fa-graduation-cap"></i> 4. Φωτογραφίες Προγραμμάτων Εκπαίδευσης & Alt Text</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
-              <!-- Prog 1 -->
+            <h3 class="sub-section-title"><i class="fa-solid fa-graduation-cap"></i> 4. Προγράμματα Εκπαίδευσης (Όλα τα Κείμενα, Χαρακτηριστικά & Εικόνες)</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
               <div class="form-group">
-                <label>1. Προεκπαίδευση Κουταβιού (Puppy):</label>
+                <label>Κεντρικός Τίτλος Ενότητας Προγραμμάτων:</label>
+                <input type="text" id="cnt_prog_header_title" value="Ολοκληρωμένα Προγράμματα <span class=&quot;highlight&quot;>Εκπαίδευσης Σκύλων</span>">
+              </div>
+              <div class="form-group">
+                <label>Υπότιτλος Ενότητας Προγραμμάτων:</label>
+                <input type="text" id="cnt_prog_header_desc" value="Κάθε σκύλος είναι μοναδικός. Προσαρμόζουμε το πρόγραμμα στον συγκεκριμένο σκύλο, στον άνθρωπό του και στον τρόπο ζωής τους.">
+              </div>
+            </div>
+
+            <!-- Program 1 -->
+            <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+              <h4 style="color: #f5e49e; margin-bottom: 12px; font-size: 1rem;"><i class="fa-solid fa-paw"></i> Πρόγραμμα 1: Προεκπαίδευση Κουταβιού (Puppy)</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Τίτλος Προγράμματος:</label>
+                  <input type="text" id="cnt_prog1_title" value="1. Προεκπαίδευση Κουταβιού (Puppy)">
+                </div>
+                <div class="form-group">
+                  <label>Ετικέτα (Tag):</label>
+                  <input type="text" id="cnt_prog1_tag" value="0 έως 4 Μηνών">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Περιγραφή Προγράμματος:</label>
+                <textarea id="cnt_prog1_desc">Για κουτάβια 0 έως 4 μηνών. Θέτουμε τις σωστές βάσεις ώστε ο μικρός σας φίλος να μεγαλώσει ισορροπημένος και συνεργάσιμος.</textarea>
+              </div>
+              <div class="form-group">
+                <label>Χαρακτηριστικά (1 ανά γραμμή):</label>
+                <textarea id="cnt_prog1_features" style="min-height: 80px;">Τουαλέτα: Σωστή ρουτίνα και εκμάθηση εξόδου&#10;Διόρθωση δαγκωμάτων: Έλεγχος πίεσης στόματος&#10;Μάσημα αντικειμένων: Προστασία σπιτιού & επίπλων&#10;Κάλεσμα με το όνομά του: Άμεση προσοχή & σύνδεση</textarea>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Κείμενο Κουμπιού CTA:</label>
+                  <input type="text" id="cnt_prog1_btn" value="Κλείστε Αξιολόγηση Κουταβιού">
+                </div>
+                <div class="form-group">
+                  <label>Alt Text Εικόνας (SEO):</label>
+                  <input type="text" id="cnt_prog1_alt" value="Προεκπαίδευση Κουταβιού Puppy">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Φωτογραφία Προγράμματος 1:</label>
                 <div class="image-picker-wrap">
                   <img id="prev_prog1" src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600&auto=format&fit=crop&q=80" class="image-preview-thumb">
                   <div class="image-picker-controls">
                     <input type="text" id="cnt_prog1_img" value="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600&auto=format&fit=crop&q=80" onchange="document.getElementById('prev_prog1').src=this.value;">
                     <label class="btn-action btn-secondary-action" style="padding: 4px 10px; font-size: 0.75rem; cursor: pointer; align-self: flex-start; margin: 0;">
-                      <i class="fa-solid fa-upload"></i> Αλλαγή
+                      <i class="fa-solid fa-upload"></i> Αλλαγή Εικόνας
                       <input type="file" accept="image/*" style="display: none;" onchange="uploadSingleImage(this, 'cnt_prog1_img', 'prev_prog1');">
                     </label>
                   </div>
                 </div>
-                <input type="text" id="cnt_prog1_alt" value="Προεκπαίδευση Κουταβιού Puppy" placeholder="Alt Text (περιγραφή SEO)..." style="margin-top: 6px; font-size: 0.82rem; padding: 8px 12px;">
               </div>
-              <!-- Prog 2 -->
+            </div>
+
+            <!-- Program 2 -->
+            <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+              <h4 style="color: #f5e49e; margin-bottom: 12px; font-size: 1rem;"><i class="fa-solid fa-paw"></i> Πρόγραμμα 2: Βασική Υπακοή (Basic Training)</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Τίτλος Προγράμματος:</label>
+                  <input type="text" id="cnt_prog2_title" value="2. Βασική Υπακοή (Basic Training)">
+                </div>
+                <div class="form-group">
+                  <label>Ετικέτα (Tag):</label>
+                  <input type="text" id="cnt_prog2_tag" value="Το πιο Δημοφιλές">
+                </div>
+              </div>
               <div class="form-group">
-                <label>2. Βασική Υπακοή (Basic):</label>
+                <label>Περιγραφή Προγράμματος:</label>
+                <textarea id="cnt_prog2_desc">Το θεμέλιο κάθε αρμονικής συνύπαρξης. Ο σκύλος μαθαίνει να κατανοεί τι ζητάμε και να συνεργάζεται πρόθυμα στην καθημερινότητα.</textarea>
+              </div>
+              <div class="form-group">
+                <label>Χαρακτηριστικά (1 ανά γραμμή):</label>
+                <textarea id="cnt_prog2_features" style="min-height: 80px;">Εκμάθηση βασικών εντολών: Κάτσε, Μείνε, Έλα κ.ά.&#10;Δομημένη βόλτα: Χαλαρό λουρί χωρίς τραβήγματα&#10;Κοινωνικοποίηση: Ηρεμία σε ερεθίσματα, ανθρώπους & σκύλους&#10;Άρνηση τροφής: Προστασία από φόλες και επικίνδυνα αντικείμενα</textarea>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Κείμενο Κουμπιού CTA:</label>
+                  <input type="text" id="cnt_prog2_btn" value="Επιλογή Βασικής Υπακοής">
+                </div>
+                <div class="form-group">
+                  <label>Alt Text Εικόνας (SEO):</label>
+                  <input type="text" id="cnt_prog2_alt" value="Βασική Υπακοή Basic Training">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Φωτογραφία Προγράμματος 2:</label>
                 <div class="image-picker-wrap">
                   <img id="prev_prog2" src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=600&auto=format&fit=crop&q=80" class="image-preview-thumb">
                   <div class="image-picker-controls">
                     <input type="text" id="cnt_prog2_img" value="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=600&auto=format&fit=crop&q=80" onchange="document.getElementById('prev_prog2').src=this.value;">
                     <label class="btn-action btn-secondary-action" style="padding: 4px 10px; font-size: 0.75rem; cursor: pointer; align-self: flex-start; margin: 0;">
-                      <i class="fa-solid fa-upload"></i> Αλλαγή
+                      <i class="fa-solid fa-upload"></i> Αλλαγή Εικόνας
                       <input type="file" accept="image/*" style="display: none;" onchange="uploadSingleImage(this, 'cnt_prog2_img', 'prev_prog2');">
                     </label>
                   </div>
                 </div>
-                <input type="text" id="cnt_prog2_alt" value="Βασική Υπακοή Basic Training" placeholder="Alt Text (περιγραφή SEO)..." style="margin-top: 6px; font-size: 0.82rem; padding: 8px 12px;">
               </div>
-              <!-- Prog 3 -->
+            </div>
+
+            <!-- Program 3 -->
+            <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+              <h4 style="color: #f5e49e; margin-bottom: 12px; font-size: 1rem;"><i class="fa-solid fa-paw"></i> Πρόγραμμα 3: Διόρθωση Συμπεριφοράς</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Τίτλος Προγράμματος:</label>
+                  <input type="text" id="cnt_prog3_title" value="3. Διόρθωση Συμπεριφοράς">
+                </div>
+                <div class="form-group">
+                  <label>Ετικέτα (Tag):</label>
+                  <input type="text" id="cnt_prog3_tag" value="Εξειδικευμένο">
+                </div>
+              </div>
               <div class="form-group">
-                <label>3. Διόρθωση Συμπεριφοράς:</label>
+                <label>Περιγραφή Προγράμματος:</label>
+                <textarea id="cnt_prog3_desc">Εντοπίζουμε τη ρίζα του προβλήματος και εκπαιδεύουμε σκύλο και κηδεμόνα για οριστική και ασφαλή αποκατάσταση της ηρεμίας.</textarea>
+              </div>
+              <div class="form-group">
+                <label>Χαρακτηριστικά (1 ανά γραμμή):</label>
+                <textarea id="cnt_prog3_features" style="min-height: 80px;">Άγχος & Φοβίες: Διαχείριση υπερδιέγερσης & ανασφάλειας&#10;Επιθετικότητα: Προς άλλους σκύλους, ανθρώπους ή αντικείμενα&#10;Στρες αποχωρισμού: Ηρεμία όταν μένει μόνος χωρίς καταστροφές&#10;Εξατομικευμένη προσέγγιση: Προσαρμοσμένη στον τρόπο ζωής σας</textarea>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Κείμενο Κουμπιού CTA:</label>
+                  <input type="text" id="cnt_prog3_btn" value="Ζητήστε Αξιολόγηση Συμπεριφοράς">
+                </div>
+                <div class="form-group">
+                  <label>Alt Text Εικόνας (SEO):</label>
+                  <input type="text" id="cnt_prog3_alt" value="Διόρθωση Προβλημάτων Συμπεριφοράς">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Φωτογραφία Προγράμματος 3:</label>
                 <div class="image-picker-wrap">
                   <img id="prev_prog3" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&auto=format&fit=crop&q=80" class="image-preview-thumb">
                   <div class="image-picker-controls">
                     <input type="text" id="cnt_prog3_img" value="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&auto=format&fit=crop&q=80" onchange="document.getElementById('prev_prog3').src=this.value;">
                     <label class="btn-action btn-secondary-action" style="padding: 4px 10px; font-size: 0.75rem; cursor: pointer; align-self: flex-start; margin: 0;">
-                      <i class="fa-solid fa-upload"></i> Αλλαγή
+                      <i class="fa-solid fa-upload"></i> Αλλαγή Εικόνας
                       <input type="file" accept="image/*" style="display: none;" onchange="uploadSingleImage(this, 'cnt_prog3_img', 'prev_prog3');">
                     </label>
                   </div>
                 </div>
-                <input type="text" id="cnt_prog3_alt" value="Διόρθωση Προβλημάτων Συμπεριφοράς" placeholder="Alt Text (περιγραφή SEO)..." style="margin-top: 6px; font-size: 0.82rem; padding: 8px 12px;">
               </div>
-              <!-- Prog 4 -->
+            </div>
+
+            <!-- Program 4 -->
+            <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+              <h4 style="color: #f5e49e; margin-bottom: 12px; font-size: 1rem;"><i class="fa-solid fa-paw"></i> Πρόγραμμα 4: Προχωρημένη Υπακοή (Advanced)</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Τίτλος Προγράμματος:</label>
+                  <input type="text" id="cnt_prog4_title" value="4. Προχωρημένη Υπακοή (Advanced)">
+                </div>
+                <div class="form-group">
+                  <label>Ετικέτα (Tag):</label>
+                  <input type="text" id="cnt_prog4_tag" value="Off-Leash">
+                </div>
+              </div>
               <div class="form-group">
-                <label>4. Προχωρημένη Υπακοή (Advanced):</label>
+                <label>Περιγραφή Προγράμματος:</label>
+                <textarea id="cnt_prog4_desc">Υπακοή χωρίς λουρί σε ελεγχόμενο χώρο. Προϋποθέτει άριστη βασική υπακοή. Για κηδεμόνες που επιθυμούν το ανώτατο επίπεδο ελέγχου.</textarea>
+              </div>
+              <div class="form-group">
+                <label>Χαρακτηριστικά (1 ανά γραμμή):</label>
+                <textarea id="cnt_prog4_features" style="min-height: 80px;">Υπακοή χωρίς λουρί: Πλήρης έλεγχος σε ελεγχόμενο χώρο&#10;Απόλυτος αυτοέλεγχος: Υψηλή εστίαση και πειθαρχία&#10;Ανταπόκριση υπό περισπασμούς: Ακαριαία εκτέλεση εντολών&#10;Προϋπόθεση: Επιτυχής ολοκλήρωση της βασικής υπακοής</textarea>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Κείμενο Κουμπιού CTA:</label>
+                  <input type="text" id="cnt_prog4_btn" value="Επιλογή Προχωρημένης Υπακοής">
+                </div>
+                <div class="form-group">
+                  <label>Alt Text Εικόνας (SEO):</label>
+                  <input type="text" id="cnt_prog4_alt" value="Προχωρημένη Υπακοή Advanced Training">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Φωτογραφία Προγράμματος 4:</label>
                 <div class="image-picker-wrap">
                   <img id="prev_prog4" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&auto=format&fit=crop&q=80" class="image-preview-thumb">
                   <div class="image-picker-controls">
                     <input type="text" id="cnt_prog4_img" value="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&auto=format&fit=crop&q=80" onchange="document.getElementById('prev_prog4').src=this.value;">
                     <label class="btn-action btn-secondary-action" style="padding: 4px 10px; font-size: 0.75rem; cursor: pointer; align-self: flex-start; margin: 0;">
-                      <i class="fa-solid fa-upload"></i> Αλλαγή
+                      <i class="fa-solid fa-upload"></i> Αλλαγή Εικόνας
                       <input type="file" accept="image/*" style="display: none;" onchange="uploadSingleImage(this, 'cnt_prog4_img', 'prev_prog4');">
                     </label>
                   </div>
                 </div>
-                <input type="text" id="cnt_prog4_alt" value="Προχωρημένη Υπακοή Advanced Training" placeholder="Alt Text (περιγραφή SEO)..." style="margin-top: 6px; font-size: 0.82rem; padding: 8px 12px;">
               </div>
-              <!-- Prog 5 -->
+            </div>
+
+            <!-- Program 5 -->
+            <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+              <h4 style="color: #f5e49e; margin-bottom: 12px; font-size: 1rem;"><i class="fa-solid fa-paw"></i> Πρόγραμμα 5: Σωματοφυλακή (Personal Protection)</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Τίτλος Προγράμματος:</label>
+                  <input type="text" id="cnt_prog5_title" value="5. Σωματοφυλακή (Personal Protection)">
+                </div>
+                <div class="form-group">
+                  <label>Ετικέτα (Tag):</label>
+                  <input type="text" id="cnt_prog5_tag" value="Προστασία">
+                </div>
+              </div>
               <div class="form-group">
-                <label>5. Σωματοφυλακή (Protection):</label>
+                <label>Περιγραφή Προγράμματος:</label>
+                <textarea id="cnt_prog5_desc">Εκπαίδευση υψηλών απαιτήσεων για την προστασία του συνοδού και της οικογένειας, βασισμένη στην υπευθυνότητα, τη σταθερότητα και τον απόλυτο έλεγχο.</textarea>
+              </div>
+              <div class="form-group">
+                <label>Χαρακτηριστικά (1 ανά γραμμή):</label>
+                <textarea id="cnt_prog5_features" style="min-height: 80px;">Προστασία συνοδού: Άμεση αποτροπή σε συνθήκες απειλής&#10;Σταθερό νευρικό σύστημα: Ψύχραιμος σκύλος χωρίς ανεξέλεγκτη επιθετικότητα&#10;Απόλυτος έλεγχος: Ακαριαία εκτέλεση & άμεση ανάκληση&#10;Ασφάλεια στην οικογένεια: Απόλυτη ισορροπία στο σπίτι</textarea>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Κείμενο Κουμπιού CTA:</label>
+                  <input type="text" id="cnt_prog5_btn" value="Ζητήστε Ενημέρωση Σωματοφυλακής">
+                </div>
+                <div class="form-group">
+                  <label>Alt Text Εικόνας (SEO):</label>
+                  <input type="text" id="cnt_prog5_alt" value="Σωματοφυλακή Σκύλου">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Φωτογραφία Προγράμματος 5:</label>
                 <div class="image-picker-wrap">
                   <img id="prev_prog5" src="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=600&auto=format&fit=crop&q=80" class="image-preview-thumb">
                   <div class="image-picker-controls">
                     <input type="text" id="cnt_prog5_img" value="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?w=600&auto=format&fit=crop&q=80" onchange="document.getElementById('prev_prog5').src=this.value;">
                     <label class="btn-action btn-secondary-action" style="padding: 4px 10px; font-size: 0.75rem; cursor: pointer; align-self: flex-start; margin: 0;">
-                      <i class="fa-solid fa-upload"></i> Αλλαγή
+                      <i class="fa-solid fa-upload"></i> Αλλαγή Εικόνας
                       <input type="file" accept="image/*" style="display: none;" onchange="uploadSingleImage(this, 'cnt_prog5_img', 'prev_prog5');">
                     </label>
                   </div>
                 </div>
-                <input type="text" id="cnt_prog5_alt" value="Σωματοφυλακή Σκύλου" placeholder="Alt Text (περιγραφή SEO)..." style="margin-top: 6px; font-size: 0.82rem; padding: 8px 12px;">
               </div>
-              <!-- Prog 6 -->
+            </div>
+
+            <!-- Program 6 -->
+            <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+              <h4 style="color: #f5e49e; margin-bottom: 12px; font-size: 1rem;"><i class="fa-solid fa-paw"></i> Πρόγραμμα 6: Φύλαξη Χώρου (Property Protection)</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Τίτλος Προγράμματος:</label>
+                  <input type="text" id="cnt_prog6_title" value="6. Φύλαξη Χώρου (Property Protection)">
+                </div>
+                <div class="form-group">
+                  <label>Ετικέτα (Tag):</label>
+                  <input type="text" id="cnt_prog6_tag" value="Φύλαξη Χώρου">
+                </div>
+              </div>
               <div class="form-group">
-                <label>6. Φύλαξη Χώρου (Property):</label>
+                <label>Περιγραφή Προγράμματος:</label>
+                <textarea id="cnt_prog6_desc">Εξειδικευμένη εκπαίδευση για προστασία οικίας, οικοπέδου ή επαγγελματικού χώρου με σαφή όρια περιμέτρου και σωστή διαχείριση.</textarea>
+              </div>
+              <div class="form-group">
+                <label>Χαρακτηριστικά (1 ανά γραμμή):</label>
+                <textarea id="cnt_prog6_features" style="min-height: 80px;">Φύλαξη οικίας & επιχείρησης: Έλεγχος & περιμετρική αποτροπή&#10;Αποτροπή εισβολέα: Ενεργητική φύλαξη χωρίς τυφλό πανικό&#10;Διάκριση ερεθισμάτων: Αναγνώριση πραγματικής απειλής&#10;Συνεργασία με τον κηδεμόνα: Πλήρης έλεγχος και ασφάλεια</textarea>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label>Κείμενο Κουμπιού CTA:</label>
+                  <input type="text" id="cnt_prog6_btn" value="Ζητήστε Ενημέρωση Φύλαξης">
+                </div>
+                <div class="form-group">
+                  <label>Alt Text Εικόνας (SEO):</label>
+                  <input type="text" id="cnt_prog6_alt" value="Φύλαξη Χώρου">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Φωτογραφία Προγράμματος 6:</label>
                 <div class="image-picker-wrap">
                   <img id="prev_prog6" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600&auto=format&fit=crop&q=80" class="image-preview-thumb">
                   <div class="image-picker-controls">
                     <input type="text" id="cnt_prog6_img" value="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600&auto=format&fit=crop&q=80" onchange="document.getElementById('prev_prog6').src=this.value;">
                     <label class="btn-action btn-secondary-action" style="padding: 4px 10px; font-size: 0.75rem; cursor: pointer; align-self: flex-start; margin: 0;">
-                      <i class="fa-solid fa-upload"></i> Αλλαγή
+                      <i class="fa-solid fa-upload"></i> Αλλαγή Εικόνας
                       <input type="file" accept="image/*" style="display: none;" onchange="uploadSingleImage(this, 'cnt_prog6_img', 'prev_prog6');">
                     </label>
                   </div>
                 </div>
-                <input type="text" id="cnt_prog6_alt" value="Φύλαξη Χώρου" placeholder="Alt Text (περιγραφή SEO)..." style="margin-top: 6px; font-size: 0.82rem; padding: 8px 12px;">
               </div>
+            </div>
+
+            <!-- Free Bonus Socialization Box -->
+            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 16px;">
+              <h4 style="color: #34d399; margin-bottom: 12px; font-size: 1rem;"><i class="fa-solid fa-gift"></i> Banner Δωρεάν Προνομίου (Ομαδικά Μαθήματα)</h4>
+              <div class="form-group">
+                <label>Τίτλος Banner:</label>
+                <input type="text" id="cnt_bonus_title" value="ΔΩΡΕΑΝ Συμμετοχή σε Ομαδικά Μαθήματα Κοινωνικοποίησης">
+              </div>
+              <div class="form-group">
+                <label>Κείμενο Banner:</label>
+                <textarea id="cnt_bonus_desc">Με την ολοκλήρωση κάθε ατομικού προγράμματος, εσείς και ο σκύλος σας αποκτάτε δωρεάν πρόσβαση στα οργανωμένα ομαδικά μαθήματα της ακαδημίας μας σε πραγματικές συνθήκες πάρκου, ώστε να τελειοποιήσετε την κοινωνικοποίησή του με απόλυτη ασφάλεια.</textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 5. Στοιχεία Επικοινωνίας & Φόρμας -->
+          <div class="sub-section-box">
+            <h3 class="sub-section-title"><i class="fa-solid fa-envelope-open-text"></i> 5. Στοιχεία Επικοινωνίας & Υποσέλιδου (Footer)</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+              <div class="form-group">
+                <label>Τηλέφωνο Σταθερό:</label>
+                <input type="text" id="cnt_contact_phone" value="210 000 0000">
+              </div>
+              <div class="form-group">
+                <label>Τηλέφωνο Κινητό:</label>
+                <input type="text" id="cnt_contact_mobile" value="690 000 0000">
+              </div>
+              <div class="form-group">
+                <label>Αριθμός WhatsApp: <span class="hint">(π.χ. 306900000000)</span></label>
+                <input type="text" id="cnt_contact_wa" value="306900000000">
+              </div>
+              <div class="form-group">
+                <label>Αριθμός Viber: <span class="hint">(π.χ. 306900000000)</span></label>
+                <input type="text" id="cnt_contact_viber" value="306900000000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Περιοχές Εξυπηρέτησης (Κείμενο στη φόρμα επικοινωνίας):</label>
+              <input type="text" id="cnt_contact_area" value="Όλη η Αττική (Κατ' οίκον) & Online Συνεδρίες πανελλαδικά">
+            </div>
+            <div class="form-group">
+              <label>Τίτλος Ενότητας Επικοινωνίας:</label>
+              <input type="text" id="cnt_contact_title" value="Κλείστε Σήμερα τη <span class=&quot;highlight&quot; style=&quot;color: #ff9f43;&quot;>Δωρεάν Αξιολόγηση</span>">
+            </div>
+            <div class="form-group">
+              <label>Υπότιτλος Ενότητας Επικοινωνίας:</label>
+              <textarea id="cnt_contact_desc">Μην αφήνετε άλλο τα προβλήματα συμπεριφοράς να δυσκολεύουν τη ζωή σας. Συμπληρώστε τη φόρμα και θα επικοινωνήσουμε μαζί σας εντός 24 ωρών για να συζητήσουμε τις ανάγκες του σκύλου σας.</textarea>
+            </div>
+            <div class="form-group">
+              <label>Σύντομο Κείμενο "Σχετικά με Εμάς" στο Footer:</label>
+              <textarea id="cnt_footer_about">Εξειδικευμένη εκπαίδευση σκύλων με περισσότερα από 25 χρόνια εμπειρίας και κρατικές πιστοποιήσεις από το 2006. Εκπαιδεύουμε έξυπνα τον σκύλο και τον κηδεμόνα για ουσιαστική επικοινωνία, συνεργασία και αρμονική συνύπαρξη.</textarea>
             </div>
           </div>
 
@@ -824,7 +1072,18 @@
           }
 
           if (c.programs) {
+            if (c.programs.header_title) document.getElementById('cnt_prog_header_title').value = c.programs.header_title;
+            if (c.programs.header_desc) document.getElementById('cnt_prog_header_desc').value = c.programs.header_desc;
+            if (c.programs.bonus_title) document.getElementById('cnt_bonus_title').value = c.programs.bonus_title;
+            if (c.programs.bonus_desc) document.getElementById('cnt_bonus_desc').value = c.programs.bonus_desc;
+
             ['prog1','prog2','prog3','prog4','prog5','prog6'].forEach(p => {
+              if (c.programs[p + '_title']) document.getElementById('cnt_' + p + '_title').value = c.programs[p + '_title'];
+              if (c.programs[p + '_tag']) document.getElementById('cnt_' + p + '_tag').value = c.programs[p + '_tag'];
+              if (c.programs[p + '_desc']) document.getElementById('cnt_' + p + '_desc').value = c.programs[p + '_desc'];
+              if (c.programs[p + '_features']) document.getElementById('cnt_' + p + '_features').value = c.programs[p + '_features'];
+              if (c.programs[p + '_btn']) document.getElementById('cnt_' + p + '_btn').value = c.programs[p + '_btn'];
+
               const imgKey = p + '_image';
               const altKey = p + '_alt';
               if (c.programs[imgKey]) {
@@ -838,6 +1097,23 @@
                 if (altInp) altInp.value = c.programs[altKey];
               }
             });
+          }
+
+          if (c.contact) {
+            if (c.contact.phone) {
+              document.getElementById('cnt_phone').value = c.contact.phone;
+              document.getElementById('cnt_contact_phone').value = c.contact.phone;
+            }
+            if (c.contact.mobile) document.getElementById('cnt_contact_mobile').value = c.contact.mobile;
+            if (c.contact.whatsapp) document.getElementById('cnt_contact_wa').value = c.contact.whatsapp;
+            if (c.contact.viber) document.getElementById('cnt_contact_viber').value = c.contact.viber;
+            if (c.contact.area) document.getElementById('cnt_contact_area').value = c.contact.area;
+            if (c.contact.title) document.getElementById('cnt_contact_title').value = c.contact.title;
+            if (c.contact.desc) document.getElementById('cnt_contact_desc').value = c.contact.desc;
+          }
+
+          if (c.footer && c.footer.about) {
+            document.getElementById('cnt_footer_about').value = c.footer.about;
           }
         }
       } catch (e) {
@@ -881,23 +1157,71 @@
           motto: "🐾 «Εκπαιδεύσου έξυπνα — Ζήσε καλύτερα!!!!!»"
         },
         programs: {
+          header_title: document.getElementById('cnt_prog_header_title').value,
+          header_desc: document.getElementById('cnt_prog_header_desc').value,
+          bonus_title: document.getElementById('cnt_bonus_title').value,
+          bonus_desc: document.getElementById('cnt_bonus_desc').value,
+
+          prog1_title: document.getElementById('cnt_prog1_title').value,
+          prog1_tag: document.getElementById('cnt_prog1_tag').value,
+          prog1_desc: document.getElementById('cnt_prog1_desc').value,
+          prog1_features: document.getElementById('cnt_prog1_features').value,
+          prog1_btn: document.getElementById('cnt_prog1_btn').value,
           prog1_image: document.getElementById('cnt_prog1_img').value,
           prog1_alt: document.getElementById('cnt_prog1_alt').value,
+
+          prog2_title: document.getElementById('cnt_prog2_title').value,
+          prog2_tag: document.getElementById('cnt_prog2_tag').value,
+          prog2_desc: document.getElementById('cnt_prog2_desc').value,
+          prog2_features: document.getElementById('cnt_prog2_features').value,
+          prog2_btn: document.getElementById('cnt_prog2_btn').value,
           prog2_image: document.getElementById('cnt_prog2_img').value,
           prog2_alt: document.getElementById('cnt_prog2_alt').value,
+
+          prog3_title: document.getElementById('cnt_prog3_title').value,
+          prog3_tag: document.getElementById('cnt_prog3_tag').value,
+          prog3_desc: document.getElementById('cnt_prog3_desc').value,
+          prog3_features: document.getElementById('cnt_prog3_features').value,
+          prog3_btn: document.getElementById('cnt_prog3_btn').value,
           prog3_image: document.getElementById('cnt_prog3_img').value,
           prog3_alt: document.getElementById('cnt_prog3_alt').value,
+
+          prog4_title: document.getElementById('cnt_prog4_title').value,
+          prog4_tag: document.getElementById('cnt_prog4_tag').value,
+          prog4_desc: document.getElementById('cnt_prog4_desc').value,
+          prog4_features: document.getElementById('cnt_prog4_features').value,
+          prog4_btn: document.getElementById('cnt_prog4_btn').value,
           prog4_image: document.getElementById('cnt_prog4_img').value,
           prog4_alt: document.getElementById('cnt_prog4_alt').value,
+
+          prog5_title: document.getElementById('cnt_prog5_title').value,
+          prog5_tag: document.getElementById('cnt_prog5_tag').value,
+          prog5_desc: document.getElementById('cnt_prog5_desc').value,
+          prog5_features: document.getElementById('cnt_prog5_features').value,
+          prog5_btn: document.getElementById('cnt_prog5_btn').value,
           prog5_image: document.getElementById('cnt_prog5_img').value,
           prog5_alt: document.getElementById('cnt_prog5_alt').value,
+
+          prog6_title: document.getElementById('cnt_prog6_title').value,
+          prog6_tag: document.getElementById('cnt_prog6_tag').value,
+          prog6_desc: document.getElementById('cnt_prog6_desc').value,
+          prog6_features: document.getElementById('cnt_prog6_features').value,
+          prog6_btn: document.getElementById('cnt_prog6_btn').value,
           prog6_image: document.getElementById('cnt_prog6_img').value,
           prog6_alt: document.getElementById('cnt_prog6_alt').value
         },
         contact: {
-          phone: document.getElementById('cnt_phone').value,
+          title: document.getElementById('cnt_contact_title').value,
+          desc: document.getElementById('cnt_contact_desc').value,
+          phone: document.getElementById('cnt_contact_phone').value || document.getElementById('cnt_phone').value,
+          mobile: document.getElementById('cnt_contact_mobile').value,
           email: document.getElementById('cnt_email').value,
-          area: "Αττική & Online Πανελλαδικά"
+          whatsapp: document.getElementById('cnt_contact_wa').value,
+          viber: document.getElementById('cnt_contact_viber').value,
+          area: document.getElementById('cnt_contact_area').value
+        },
+        footer: {
+          about: document.getElementById('cnt_footer_about').value
         }
       };
 

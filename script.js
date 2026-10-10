@@ -1117,35 +1117,130 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // 4. Program Images & Alt Text
+    // 4. Program Cards, Texts, Features & Images
     if (c.programs) {
+      if (c.programs.header_title) {
+        const progHeaderH2 = document.querySelector('.programs-section .section-header h2');
+        if (progHeaderH2) progHeaderH2.innerHTML = c.programs.header_title;
+      }
+      if (c.programs.header_desc) {
+        const progHeaderP = document.querySelector('.programs-section .section-header p');
+        if (progHeaderP) progHeaderP.textContent = c.programs.header_desc;
+      }
+      if (c.programs.bonus_title) {
+        const bonusH3 = document.querySelector('.bonus-content h3');
+        if (bonusH3) bonusH3.textContent = c.programs.bonus_title;
+      }
+      if (c.programs.bonus_desc) {
+        const bonusP = document.querySelector('.bonus-content p');
+        if (bonusP) bonusP.textContent = c.programs.bonus_desc;
+      }
+
       const progCards = document.querySelectorAll('.programs-grid .program-card');
       const progKeys = ['prog1', 'prog2', 'prog3', 'prog4', 'prog5', 'prog6'];
       progCards.forEach((card, idx) => {
         const key = progKeys[idx];
         if (key) {
+          // Tag
+          if (c.programs[key + '_tag']) {
+            const tag = card.querySelector('.card-popular-tag');
+            if (tag) tag.textContent = c.programs[key + '_tag'];
+          }
+          // Image & Alt
           const img = card.querySelector('.program-img');
           if (img) {
             if (c.programs[key + '_image']) img.src = c.programs[key + '_image'];
             if (c.programs[key + '_alt']) img.alt = c.programs[key + '_alt'];
           }
+          // Title
+          if (c.programs[key + '_title']) {
+            const title = card.querySelector('.program-title');
+            if (title) title.textContent = c.programs[key + '_title'];
+          }
+          // Description
+          if (c.programs[key + '_desc']) {
+            const desc = card.querySelector('.program-desc');
+            if (desc) desc.textContent = c.programs[key + '_desc'];
+          }
+          // Features list
+          if (c.programs[key + '_features']) {
+            const featUl = card.querySelector('.program-features');
+            if (featUl) {
+              const lines = c.programs[key + '_features'].split('\n').filter(l => l.trim().length > 0);
+              if (lines.length > 0) {
+                featUl.innerHTML = lines.map(line => {
+                  const parts = line.split(':');
+                  if (parts.length > 1) {
+                    return `<li><i class="fa-solid fa-circle-check"></i> <strong>${parts[0].trim()}:</strong> ${parts.slice(1).join(':').trim()}</li>`;
+                  }
+                  return `<li><i class="fa-solid fa-circle-check"></i> ${line.trim()}</li>`;
+                }).join('');
+              }
+            }
+          }
+          // Button CTA
+          if (c.programs[key + '_btn']) {
+            const btn = card.querySelector('.btn-block');
+            if (btn) btn.textContent = c.programs[key + '_btn'];
+          }
         }
       });
     }
 
-    // 5. Contact Info
+    // 5. Contact Info, WhatsApp, Viber & Areas
     if (c.contact) {
+      if (c.contact.title) {
+        const contactH2 = document.querySelector('.contact-info h2');
+        if (contactH2) contactH2.innerHTML = c.contact.title;
+      }
+      if (c.contact.desc) {
+        const contactP = document.querySelector('.contact-info > p');
+        if (contactP) contactP.textContent = c.contact.desc;
+      }
       if (c.contact.phone) {
         document.querySelectorAll('a[href^="tel:"]').forEach(a => {
-          a.href = `tel:${c.contact.phone.replace(/\s+/g, '')}`;
+          // If not the mobile one
+          if (!a.getAttribute('href').includes(c.contact.mobile ? c.contact.mobile.replace(/\s+/g, '') : '690')) {
+            a.href = `tel:${c.contact.phone.replace(/\s+/g, '')}`;
+            if (a.classList.contains('contact-link') && a.title.includes('σταθερό')) a.textContent = c.contact.phone;
+          }
+        });
+      }
+      if (c.contact.mobile) {
+        document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+          if (a.title && a.title.includes('κινητό')) {
+            a.href = `tel:${c.contact.mobile.replace(/\s+/g, '')}`;
+            a.textContent = c.contact.mobile;
+          }
         });
       }
       if (c.contact.email) {
         document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
           a.href = `mailto:${c.contact.email}`;
+          if (a.classList.contains('contact-link')) a.textContent = c.contact.email;
           if (a.querySelector('strong')) a.querySelector('strong').textContent = c.contact.email;
         });
       }
+      if (c.contact.whatsapp) {
+        document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+          a.href = `https://wa.me/${c.contact.whatsapp.replace(/\D/g, '')}?text=%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%B1%CF%82,%20%CE%B8%CE%B1%20%CE%AE%CE%B8%CE%B5%CE%BB%CE%B1%20%CF%80%CE%BB%CE%B7%CF%81%CE%BF%CF%86%CE%BF%CF%81%CE%AF%CE%B5%CF%82%20%CE%B3%CE%B9%CE%B1%20%CF%84%CE%B7%CE%BD%20%CE%B5%CE%BA%CF%80%CE%B1%CE%AF%CE%B4%CE%B5%CF%85%CF%83%CE%B7%20%CF%84%CE%BF%CF%85%20%CF%83%CE%BA%CF%8D%CE%BB%CE%BF%CF%85%20%CE%BC%CE%BF%CF%85`;
+        });
+      }
+      if (c.contact.viber) {
+        document.querySelectorAll('a[href*="viber:"]').forEach(a => {
+          a.href = `viber://chat?number=%2B${c.contact.viber.replace(/\D/g, '')}`;
+        });
+      }
+      if (c.contact.area) {
+        const areaSpan = document.querySelector('.contact-item:last-child .contact-item-text span');
+        if (areaSpan) areaSpan.textContent = c.contact.area;
+      }
+    }
+
+    // 6. Footer About Text
+    if (c.footer && c.footer.about) {
+      const footerP = document.querySelector('.footer-about p');
+      if (footerP) footerP.textContent = c.footer.about;
     }
   };
 
