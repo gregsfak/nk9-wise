@@ -1032,6 +1032,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 750);
     }
   } catch (e) {
+    setTimeout(() => {
+      showBanner();
+    }, 750);
+  }
+
   /* ===================================================
      11. Dynamic Content Synchronization (content.json)
      =================================================== */
