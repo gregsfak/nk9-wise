@@ -1072,11 +1072,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // 2. Hero Section & YouTube Video
+    // 2. Hero Section & Video Modal Sync
     if (c.hero) {
-      if (c.hero.title) {
-        const heroH1 = document.querySelector('.hero-content h1');
-        if (heroH1) heroH1.innerHTML = c.hero.title;
+      if (c.hero.logo) {
+        const heroLogo = document.querySelector('.hero-brand-logo-img');
+        if (heroLogo) heroLogo.src = c.hero.logo;
+      }
+      if (c.hero.mottoSmart) {
+        const smartEl = document.querySelector('.motto-line-smart');
+        if (smartEl) smartEl.textContent = c.hero.mottoSmart;
+      }
+      if (c.hero.mottoBetter) {
+        const betterEl = document.querySelector('.motto-line-better');
+        if (betterEl) betterEl.textContent = c.hero.mottoBetter;
       }
       if (c.hero.subtitle) {
         const heroSub = document.querySelector('.hero-subtitle');
