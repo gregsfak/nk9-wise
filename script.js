@@ -1074,6 +1074,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Hero Section & Video Modal Sync
     if (c.hero) {
+      if (c.hero.title) {
+        const heroTitle = document.querySelector('.hero-content h1');
+        if (heroTitle) heroTitle.innerHTML = c.hero.title;
+      }
       if (c.hero.logo) {
         const heroLogo = document.querySelector('.hero-brand-logo-img');
         if (heroLogo) heroLogo.src = c.hero.logo;
