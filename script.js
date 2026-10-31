@@ -1107,6 +1107,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // 2.5 Method Section & Image
+    if (c.method) {
+      if (c.method.image) {
+        const methodImg = document.querySelector('.method-img');
+        if (methodImg) {
+          methodImg.src = c.method.image;
+          if (c.method.imageAlt) methodImg.alt = c.method.imageAlt;
+        }
+      }
+    }
+
     // 3. Trainer Profile & Image
     if (c.trainer) {
       if (c.trainer.image) {
